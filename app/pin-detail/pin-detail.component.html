@@ -1,0 +1,15 @@
+<div *ngIf="pin" class="detail">
+  <h2>{{pin.name}} details!</h2>
+  <p>{{pin.timestamp | date}}</p>
+  <p>{{pin.description}}</p>
+  <p *ngIf=[pin.adress]>{{pin.adress}}</p>
+  <img *ngIf=[pin.photoUrl] src="{{pin.photoUrl}}"/>
+  <br>
+  <!-- <button (click)="save()">Save</button> -->
+  <sebm-google-map [latitude]="pin.lat" [longitude]="pin.lng" [zoom]="15">
+    <sebm-google-map-marker [latitude]="pin.lat" [longitude]="pin.lng">
+    </sebm-google-map-marker>
+  </sebm-google-map>
+
+  <my-comments [pinId]="pin.id"></my-comments>
+</div>

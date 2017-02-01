@@ -1,0 +1,27 @@
+<div class="container">
+    <h1>Create a Pin</h1>
+    {{errorMess}}
+    {{diagnostic}}
+    
+    <div *ngIf="!pin">
+      <p>Click on the map</p>
+      <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="11" (mapClick)="newPin($event)" >
+      </sebm-google-map>
+    </div>
+       {{diagnostic}} 
+    <form (ngSubmit)="onSubmit(form.value, form.valid)" [formGroup]="form">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" formControlName="name"  >
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" formControlName="description">
+      </div>
+      <div class="form-group">
+        <label for="adress">Adresse</label>
+        <input type="text" class="form-control" formControlName="adress">
+      </div>
+      <button type="submit" class="btn btn-default" [disabled]="!form.valid">Submit</button>
+    </form>
+</div>

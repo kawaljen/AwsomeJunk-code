@@ -1,0 +1,25 @@
+
+<h2>My Pins</h2>
+{{errorMess}}
+<sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="11">
+  <sebm-google-map-marker *ngFor="let pin of pins" [latitude]="pin.lat"
+        [longitude]="pin.lng" openInfoWindow=true>
+    <sebm-google-map-info-window> <!-- no need to set lat/lng here - gets lat/lng from the marker -->
+      <img *ngIf="pin.photoUrl" src="{{pin.photoUrl}}" class="infowindowImg"/>
+      {{pin.name}}<br />
+      <button (click)="gotoDetail(pin.id)">View Details</button>
+    </sebm-google-map-info-window>
+  </sebm-google-map-marker>
+</sebm-google-map>
+<!--<ul class="pins">
+  <li *ngFor="let pin of pins"
+      (click)="onSelect(pin)"
+      [class.selected]="pin === selectedPin">
+    <span class="badge">{{pin.id}}</span>
+    <span>{{pin.name}}</span>
+    <button class="delete"
+      (click)="delete(pin); $event.stopPropagation()">x</button> 
+  </li>
+</ul>-->
+
+

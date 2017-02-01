@@ -1,0 +1,35 @@
+<div *ngIf="pinId"> 
+  <h2>Comments</h2>
+  <p>Read the comments of previous awesomeJunk people or add new one if you have additional information.
+  <ul class="comments">
+    <ng-container *ngFor="let comment of comments">
+      <li [ngSwitch]="comment.moderated">
+        <div *ngSwitchCase="true">
+          <div>{{comment.timestamp | date}}</div>
+          <div>{{comment.description}}</div>
+          <img *ngIf=[comment.photoUrl] src="{{comment.photoUrl}}"/>
+        </div>
+        <div *ngSwitchDefault>
+          <span>A comment is waiting moderation here..</span>
+        </div>
+      </li>
+    </ng-container>
+  </ul>
+  <h3>Add a comment</h3>
+  <p *ngIf="submited">Thanks, the message will get moderated shortly</p>
+  <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" formControlName="description" >
+              <!--<div [hidden]="description.valid || description.pristine"
+                  class="alert alert-danger">
+                  Description is required, just put 'photo' or anything if you have nothing else to add than a picture
+              </div>-->
+      </div>
+
+      <button type="submit" class="btn btn-default" [disabled]="!form.valid">Add a comment</button>
+    </form>
+  </div>
+  <div *ngIf="!pinId"> 
+    No comments to read or to add available due to a falty pipe.
+  </div>

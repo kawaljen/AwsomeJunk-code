@@ -1,80 +1,32 @@
+<!DOCTYPE html>
 <html>
-<head>
-  <title>A Leaflet map!</title>
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-   <style>
-	   #map { height: 100%; position:relative;}
-	   .leaflet-container img{ width:100%;}
-	   .box{position:absolute; right:0; top:0; background-color:#fff; width:300px; display:none;}
-	   .box.open{display:block;}
-	   .box input{ width:100%;padding:5px;margin:5px;}
-   </style>
-   
-   <script language="javascript">
-      function init() {
-			var map = L.map('map');
+  <head>
+    <title>Awesome junk</title>
 
-			//add a tile layer to add to our map, in this case it's the 'standard' OpenStreetMap.org tile server
-			L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-			maxZoom: 18
-			}).addTo(map);
+    <base href="/">
 
-			map.attributionControl.setPrefix(''); // Don't show the 'Powered by Leaflet' text. Attribution overload
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet"
+      href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
 
-			var london = new L.LatLng(51.505, -0.09); // geographical point (longitude and latitude)
-			map.setView(london, 13);
 
-			var marker = L.marker([51.5, -0.09]).addTo(map);
-			marker.bindPopup("<b>Sofa bed</b><br><img src='img/sofa.jpg'/>").openPopup();
-					 
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
 
-			function onMapClick(e) {	
-				$('.box').addClass('open');	
-				temp = e.latlng;
-			}
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
 
-			function onSend(e) {
-				var title = $('#title').val(),
-					state = $('#state').val();
-					//position = $('.position').val();
-				id++;	
-				var marker2 = L.marker(temp).addTo(map);
-				marker2.bindPopup("<div data-id="+id+"><b>"+ title+"</b><br>"+ state+"<img src='img/sofa.jpg'/><span class='update'>update info</span></div>").openPopup();
-				$('.box').removeClass('open');	
-				marker = {'id' : id, 'title' : title, 'state' : state, 'position': temp };
-				markers.push(marker);
-				$('.update').on('click', update);
-			}
-			
-			function update() {
-				$('.box').addClass('open');
-				var id = $(this).parent().data('id');
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
 
-			}
-			
+    <link rel="stylesheet" href="styles.css">
+  </head>
 
-			var temp, id=0, markers = [];
-
-			map.on('click', onMapClick);		
-			$('.update').on('click', update);
-			$('#send').on('click', onSend);
-			
-      }
-   </script>
-   
-</head>
-<body onLoad="javascript:init();">
-   <div id="map"></div>
-   <div class="box" >
-		<input type="text" id="title"/>
-		<input type="text" id="state"/>
-		<input type="hidden" id="position"/>
-		<input type="button" value="send" id="send"/>
-   </div>
-   
-</body>   
+  <body>
+    <my-app>Loading AppComponent content here ...</my-app>
+  </body>
 </html>
-	

@@ -1,0 +1,16 @@
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+/*GOOGLE MAP*/
+.sebm-google-map-container {
+  height: 400px;
+}
+.infowindowImg {
+  width: 100%;
+  max-width: 200px;
+  display: block;
+}
